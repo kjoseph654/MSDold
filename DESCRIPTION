@@ -1,0 +1,18 @@
+Package: MSD
+Title: Mid Summer Drought Values
+Version: 0.1.6
+Authors@R: person("Kenny", "Joseph", email = "knjoseph@scu.edu",
+  role = c("aut", "cre"))
+Description: This package calculates some important values of the mid summer drought using four functions: onset, minimum,
+    duration, and intensity. These functions all take in a time series of daily values, apply a triangular smoothing function
+    to the data, and then calculate the respective value. This package can be used with a time series vector or a rasterbrick.
+    Some important notes are that this package currently only supports 365 day years, and assumes that the time series starts
+    with Janurary 1st and not any other value.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    signal
+Suggests:
+    raster
+RoxygenNote: 6.1.1
