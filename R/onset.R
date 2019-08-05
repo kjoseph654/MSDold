@@ -7,11 +7,16 @@
 #'
 #' @description r <- raster::calc(x, mean)
 #'
-#' @usage onset(x, date1="1950-05-01", date2="1950-07-15", date3="1950-07-16", date4="1950-09-30")
+#' @description If the index vector from lpdates is not saved as 'dated', a function will have to be created to use it in raster::calc.
+#' 
+#' @description onset1<-function(x){
+#'   onset(x,ind=vector)
+#' }
+#'
+#' @usage onset(x, ind=dated)
 #'
 #' @param x          RasterBrick or TimeSeries
-#' @param date1      Start index to find first onset date
-#' @param date2      End index to find first onset date
+#' @param ind        Index of Dates from the lpdates function (should be saved as 'dated')
 #'
 #' @return RasterBrick or TimeSeries of Yearly data
 #'
@@ -24,18 +29,14 @@
 #' # using TimeSeries
 #' r<-onset(x)
 #' @export
-onset <- function (b, date1="1950-05-01", date2="1950-07-15") {
-  #b=rasterbrick, date1<-first date, date2<-second date
-
-  date1<-as.numeric(strftime(date1, format="%j"))
-  date2<-as.numeric(strftime(date2, format="%j"))
-
+onset <-function(x, ind=dated){
   filtered<-c(x)
   new<-c(0)
-  for (year in 1:(length(filtered)/365))
+  
+  for(year in 1:(length(ind)/4))
   {
-    new[year]<-max(filtered[(date1+(365*year-365)):(date2+(365*year-365))])
+    max1<-max(filtered[ind[(year-1)*4+1]:ind[(year-1)*4+2]])
+    new[year]<-max1
   }
-
   return(new)
 }
