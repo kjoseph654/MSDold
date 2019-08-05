@@ -4,18 +4,12 @@
 \alias{dur}
 \title{Duration Value}
 \usage{
-dur(x, date1="1950-05-01", date2="1950-07-15", date3="1950-07-16", date4="1950-09-30")
+dur(x, ind=dated)
 }
 \arguments{
 \item{x}{RasterBrick or TimeSeries}
 
-\item{date1}{Start index to find first onset date}
-
-\item{date2}{End index to find first onset date}
-
-\item{date3}{Start index to find second onset date}
-
-\item{date4}{End index to find second onset date}
+\item{ind}{Index of Dates from the lpdates function (should be saved as 'dated')}
 }
 \value{
 RasterBrick or TimeSeries of Yearly data
@@ -28,6 +22,12 @@ The input must be in the form of daily data, with the first data point being Jan
 If x is a RasterBrick, then the output is a RasterBrick with a data point for each year. If you would like to find a statistical value of the new rasterbrick, it is recommended to use
 
 r <- raster::calc(x, mean)
+
+If the index vector from lpdates is not saved as 'dated', a function will have to be created to use it in raster::calc.
+
+dura<-function(x){
+  dur(x,ind=vector)
+}
 }
 \examples{
 # using RasterBricks
