@@ -2,6 +2,8 @@
 
 export(bartlett_noise_filter)
 export(dur)
+export(find_leap)
 export(intensity)
+export(lpdates)
 export(minimum)
 export(onset)

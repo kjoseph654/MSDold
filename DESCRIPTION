@@ -1,6 +1,6 @@
 Package: MSD
 Title: Mid Summer Drought Values
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: person("Kenny", "Joseph", email = "knjoseph@scu.edu",
   role = c("aut", "cre"))
 Description: This package calculates some important values of the mid summer drought using four functions: onset, minimum,
