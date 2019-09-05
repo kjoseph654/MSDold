@@ -19,5 +19,6 @@
 #'
 #' @export
 find_leap = function(x){
+  library(lubridate)
   day(x) == 29 & month(x) == 2
 }

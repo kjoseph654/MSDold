@@ -7,13 +7,10 @@
 #'
 #' @description r <- raster::calc(x, mean)
 #'
-#' @usage minimum(x, date1="1950-05-01", date2="1950-07-15", date3="1950-07-16", date4="1950-09-30")
+#' @usage minimum(x, ind=dated)
 #'
 #' @param x          RasterBrick or TimeSeries
-#' @param date1      Start index to find first onset date
-#' @param date2      End index to find first onset date
-#' @param date3      Start index to find second onset date
-#' @param date4      End index to find second onset date
+#' @param ind        Index of Dates from the lpdates function (should be saved as 'dated')
 #'
 #' @return RasterBrick or TimeSeries of Yearly data
 #'
@@ -26,24 +23,19 @@
 #' # using TimeSeries
 #' r<-minimum(x)
 #' @export
-minimum<-function(x, date1="1950-05-01", date2="1950-07-15", date3="1950-07-16", date4="1950-09-30"){
+minimum<-function(x, ind=dated){
   #b=rasterbrick, date1/date2=index to find onset date, date3/date4=index to find "second" onset date
-
-  date1<-as.numeric(strftime(date1, format="%j"))
-  date2<-as.numeric(strftime(date2, format="%j"))
-  date3<-as.numeric(strftime(date3, format="%j"))
-  date4<-as.numeric(strftime(date4, format="%j"))
-
+  
   filtered<-c(x)
   new<-c(0)
 
   for(year in 1:(length(filtered)/365))
   {
-    max1<-max(filtered[(date1+(365*year-365)):(date2+(365*year-365))])
-    max2<-max(filtered[(date3+(365*year-365)):(date4+(365*year-365))])
+    max1<-max(filtered[ind[(year-1)*4+1]:ind[(year-1)*4+2]])
+    max2<-max(filtered[ind[(year-1)*4+3]:ind[(year-1)*4+4]])
 
-    date5<-match(max1, filtered)
-    date6<-match(max2, filtered)
+    date5<-ind[1]+365*(year)-365+match(max1, filtered[ind[(year-1)*4+1]:ind[(year-1)*4+2]])-1
+    date6<-ind[3]+365*(year)-365+match(max2, filtered[ind[(year-1)*4+3]:ind[(year-1)*4+4]])-1
     new[year]<-min(filtered[date5:date6])
   }
 
