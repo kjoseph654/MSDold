@@ -4,18 +4,12 @@
 \alias{intensity}
 \title{Intensity Value}
 \usage{
-intensity(x, date1="1950-05-01", date2="1950-07-15", date3="1950-07-16", date4="1950-09-30")
+intensity(x, ind=dated)
 }
 \arguments{
 \item{x}{RasterBrick or TimeSeries}
 
-\item{date1}{Start index to find first onset date}
-
-\item{date2}{End index to find first onset date}
-
-\item{date3}{Start index to find second onset date}
-
-\item{date4}{End index to find second onset date}
+\item{ind}{Index of Dates from the lpdates function (should be saved as 'dated')}
 }
 \value{
 RasterBrick or TimeSeries of Yearly data
